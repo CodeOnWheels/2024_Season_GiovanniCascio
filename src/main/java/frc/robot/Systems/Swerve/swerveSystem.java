@@ -9,4 +9,12 @@ public class swerveSystem {
     public void drive(double xVelocity, double yVelocity, double rotation_angle){
         
     }
+
+    public void stop(){
+
+    }
+
+    public void defend(){
+        
+    }
 }
