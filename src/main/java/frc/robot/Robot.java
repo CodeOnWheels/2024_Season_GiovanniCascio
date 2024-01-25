@@ -5,8 +5,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Systems.controlResponseSystem;
+import frc.robot.Systems.Vision.vision;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -79,9 +82,19 @@ public class Robot extends TimedRobot {
     }
   }
 
+controlResponseSystem CRS = new controlResponseSystem();
+vision camera1 = new vision();
+XboxController controller1 = new XboxController(0);
+
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    //Approach an April Tag using Vision
+    CRS.swerveCommand(camera1.getOffset(), camera1.getDistance(), 0);
+
+    //Send controller data
+    CRS.swerveCommand(controller1.getRawAxis(0), controller1.getRawAxis(1), controller1.getRawAxis(2));
+  }
 
   @Override
   public void testInit() {

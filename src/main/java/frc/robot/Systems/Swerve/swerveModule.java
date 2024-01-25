@@ -30,4 +30,9 @@ public class swerveModule {
     public void setAngle(double angle){
         turnMotor.set(pid.calculate(getAngle(), angle));
     }
+
+    public void stop(){
+        driveMotor.set(0);
+        turnMotor.set(0);
+    }
 }
