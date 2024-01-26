@@ -27,8 +27,9 @@ public class swerveModule {
         return encoder.getPosition();
     }
 
-    public void setAngle(double angle){
+    public void setState(double angle, double speed){
         turnMotor.set(pid.calculate(getAngle(), angle));
+        driveMotor.set(speed);
     }
 
     public void stop(){
