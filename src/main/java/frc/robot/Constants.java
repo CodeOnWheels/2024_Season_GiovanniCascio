@@ -21,4 +21,6 @@ public final class Constants {
   public static double CHASSISLENGTH = 5;
   public static double CHASSISWIDTHRADIUS = CHASSISWIDTH / 2;
   public static double CHASSISLENGTHRADIUS = CHASSISLENGTH / 2;
+
+  public static double DEADZONE = 0.15;
 }

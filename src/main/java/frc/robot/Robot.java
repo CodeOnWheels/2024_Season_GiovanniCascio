@@ -82,14 +82,12 @@ public class Robot extends TimedRobot {
     }
   }
 
-controlResponseSystem CRS = new controlResponseSystem();
-vision camera1 = new vision();
-XboxController controller1 = new XboxController(0);
+controlResponseSystem CRS = new controlResponseSystem(true, false, false);
 
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    
+    CRS.listenLoop();
   }
 
   @Override
