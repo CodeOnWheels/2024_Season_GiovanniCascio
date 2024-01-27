@@ -14,7 +14,7 @@ public class swerveModule {
 
     double encoderOffset;
 
-    PIDController pid = new PIDController(0, 0, 0);
+    PIDController pid = new PIDController(0.0001, 0, 0);
 
     public swerveModule(int driveID, int turnID){
         CANSparkMax driveMotor = new CANSparkMax(driveID, MotorType.kBrushless);

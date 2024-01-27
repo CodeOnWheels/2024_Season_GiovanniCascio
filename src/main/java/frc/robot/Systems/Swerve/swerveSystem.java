@@ -1,6 +1,10 @@
 package frc.robot.Systems.Swerve;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
+
 import frc.robot.driveSystem;
+
+import frc.robot.Constants;
 
 public class swerveSystem implements driveSystem{
 
@@ -9,28 +13,32 @@ public class swerveSystem implements driveSystem{
     swerveModule module3 = new swerveModule(5, 6);
     swerveModule module4 = new swerveModule(7, 8);
 
-    public double getMotorVelocities(){
-        // Insert equation
-        return 0;
+    public double getMotorVelocity(boolean isPositive, double joystickValue, double chassisDimension, double r){
+        // The second term positive or negative.
+        if (isPositive) {
+            return joystickValue + (chassisDimension * r);
+        } else {
+            return joystickValue - (chassisDimension * r);
+        }
     }
 
-    public double getMotorAngle(){
+    public double getMotorAngle(double xVelocity, double yVelocity, double r){
         // Insert equation
-        return 0;
+        return Math.atan(yVelocity / (xVelocity + 0.000001)) - r;
     }
     
-    public double getMotorSpeeds() {
+    public double getMotorSpeeds(double xVelocity, double yVelocity) {
         // Insert equation
-        return 0;
+        return Math.sqrt((Math.pow(xVelocity, 2)) + (Math.pow(yVelocity, 2)));
     }
 
     @Override
     public void drive(double x, double y, double r) {
         // Insert correct parameters
-        module1.setState(getMotorAngle(), getMotorSpeeds());
-        module2.setState(getMotorAngle(), getMotorSpeeds());
-        module3.setState(getMotorAngle(), getMotorSpeeds());
-        module4.setState(getMotorAngle(), getMotorSpeeds());
+        module1.setState(getMotorAngle(getMotorVelocity(false, x, Constants.CHASSISWIDTHRADIUS, r), getMotorVelocity(true, y, Constants.CHASSISLENGTHRADIUS, r), r), getMotorSpeeds(getMotorVelocity(false, x, Constants.CHASSISWIDTHRADIUS, r), getMotorVelocity(true, y, Constants.CHASSISLENGTHRADIUS, r)));
+        module2.setState(getMotorAngle(getMotorVelocity(false, x, Constants.CHASSISWIDTHRADIUS, r), getMotorVelocity(false, y, Constants.CHASSISLENGTHRADIUS, r), r), getMotorSpeeds(getMotorVelocity(false, x, Constants.CHASSISWIDTHRADIUS, r), getMotorVelocity(false, y, Constants.CHASSISLENGTHRADIUS, r)));
+        module3.setState(getMotorAngle(getMotorVelocity(true, x, Constants.CHASSISWIDTHRADIUS, r), getMotorVelocity(false, y, Constants.CHASSISLENGTHRADIUS, r), r), getMotorSpeeds(getMotorVelocity(true, x, Constants.CHASSISWIDTHRADIUS, r), getMotorVelocity(false, y, Constants.CHASSISLENGTHRADIUS, r)));
+        module4.setState(getMotorAngle(getMotorVelocity(true, x, Constants.CHASSISWIDTHRADIUS, r), getMotorVelocity(true, y, Constants.CHASSISLENGTHRADIUS, r), r), getMotorSpeeds(getMotorVelocity(true, x, Constants.CHASSISWIDTHRADIUS, r), getMotorVelocity(true, y, Constants.CHASSISLENGTHRADIUS, r)));
     }
 
     @Override
@@ -40,7 +48,4 @@ public class swerveSystem implements driveSystem{
         module3.stop();
         module4.stop();
     }
-
-    
-    
 }

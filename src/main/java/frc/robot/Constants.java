@@ -16,4 +16,9 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
+
+  public static double CHASSISWIDTH = 5;
+  public static double CHASSISLENGTH = 5;
+  public static double CHASSISWIDTHRADIUS = CHASSISWIDTH / 2;
+  public static double CHASSISLENGTHRADIUS = CHASSISLENGTH / 2;
 }
